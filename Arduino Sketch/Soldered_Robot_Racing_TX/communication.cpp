@@ -86,7 +86,7 @@ int RF::checksumCalculation(struct msg *_m)
     uint8_t _sum = 0;
 
     // Go trough whole struct. Skip checksum itself (uint8_t) and lastMessageTimestamp (unsigned long).
-    for (int i = 0; i < (sizeof(struct msg) - sizeof(unsigned long) - sizeof(uint8_t)); i++)
+    for (int i = 0; i < (sizeof(struct msg) - 8); i++)
     {
         _sum += *(_p++);
     }

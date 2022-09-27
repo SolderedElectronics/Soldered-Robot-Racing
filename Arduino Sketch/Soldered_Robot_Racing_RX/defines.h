@@ -10,6 +10,9 @@
 // Buzzer pin on the DFR Robot
 #define BUZZER_PIN      15
 
+// Buzzer frequency in hertz
+#define BUZZER_FREQ     750
+
 // Message header (so proper message can be recognised). Random picked number, can be any 32 bit number.
 // But keep in mind, the same number must be used on the robot as well as on controller.
 // Otherwise it won't work.

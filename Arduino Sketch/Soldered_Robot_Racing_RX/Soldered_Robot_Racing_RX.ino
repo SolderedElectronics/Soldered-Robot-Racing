@@ -47,7 +47,7 @@ void setup()
     robot.begin();
 
     // Init library for RF communication (ESP-NOW and data parsing)
-    rf.init(rxAddress2, txAddress);
+    rf.init(rxAddress1, txAddress);
 
     // Init library for the WS2812 LEDs on the robot.
     led.begin();
@@ -61,6 +61,10 @@ void setup()
     led.setPixelColor(1, led.Color(128, 0, 0));
     led.setPixelColor(2, led.Color(128, 0, 0));
     led.show();
+
+    // Set buzzer GPIO to output, low.
+    pinMode(BUZZER_PIN, OUTPUT);
+    digitalWrite(BUZZER_PIN, LOW);
 }
 
 void loop()
@@ -83,7 +87,7 @@ void loop()
                 {
                     // Set buzzer frequency to 500Hz on GPIO15.
                     ledcAttachPin(BUZZER_PIN, 0);
-                    ledcWriteTone(0, 500);
+                    ledcWriteTone(0, BUZZER_FREQ);
                 }
                 else
                 {
@@ -117,7 +121,7 @@ void loop()
             }
 
             // If robot is stopped, show brake lights
-            if (myRobotDataNew.lMotor == 0 || myRobotDataNew.rMotor == 0)
+            if (myRobotDataNew.lMotor == 0 && myRobotDataNew.rMotor == 0)
             {
                 led.setPixelColor(1, led.Color(128, 0, 0));
                 led.setPixelColor(2, led.Color(128, 0, 0));

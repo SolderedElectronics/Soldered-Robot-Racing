@@ -76,7 +76,7 @@ int RF::checksumCalculation(struct msg *_m)
     uint8_t _sum = 0;
 
     // Go trough whole struct. Skip checksum itself (uint8_t) and lastMessageTimestamp (unsigned long).
-    for (int i = 0; i < (sizeof(struct msg) - sizeof(unsigned long) - sizeof(uint8_t)); i++)
+    for (int i = 0; i < (sizeof(struct msg) - 8); i++)
     {
         _sum += *(_p++);
     }
@@ -94,11 +94,9 @@ int RF::parseData(struct robotData *_r)
 
     // Then check the checksum
     uint8_t _calculatedChecksum = checksumCalculation(&myMessage);
-
-    //Serial.printf("Checksum calculated: %d, Checksum rx: %d\r\n", _calculatedChecksum, myMessage.checksum);
-
+    
     // Checksum is wrong? Return error!
-    //if ((_calculatedChecksum != myMessage.checksum) || (myMessage.header != MESSAGE_HEADER)) return 0;
+    if ((_calculatedChecksum != myMessage.checksum) || (myMessage.header != MESSAGE_HEADER)) return 0;
 
     // Now let's extract the data from the struct
     _r->frontLights = myMessage.lights;
