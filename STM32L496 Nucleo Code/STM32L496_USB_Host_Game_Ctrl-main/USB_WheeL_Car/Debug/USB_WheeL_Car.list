@@ -17,27 +17,27 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, DATA
   6 .data         00000090  20000000  0800a1f0  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .bss          000007d4  20000090  0800a280  00020090  2**2
+  7 .bss          00000800  20000090  0800a280  00020090  2**2
                   ALLOC
-  8 ._user_heap_stack 00000600  20000864  0800a280  00020864  2**0
+  8 ._user_heap_stack 00000600  20000890  0800a280  00020890  2**0
                   ALLOC
   9 .ARM.attributes 00000030  00000000  00000000  00020090  2**0
                   CONTENTS, READONLY
- 10 .debug_info   00020e86  00000000  00000000  000200c0  2**0
+ 10 .debug_info   00020e96  00000000  00000000  000200c0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_abbrev 00003cc2  00000000  00000000  00040f46  2**0
+ 11 .debug_abbrev 00003cc2  00000000  00000000  00040f56  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_aranges 00001128  00000000  00000000  00044c08  2**3
+ 12 .debug_aranges 00001128  00000000  00000000  00044c18  2**3
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_ranges 00000fb0  00000000  00000000  00045d30  2**3
+ 13 .debug_ranges 00000fb0  00000000  00000000  00045d40  2**3
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_line   00009d9b  00000000  00000000  00046ce0  2**0
+ 14 .debug_line   00009d9b  00000000  00000000  00046cf0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_str    00006098  00000000  00000000  00050a7b  2**0
+ 15 .debug_str    00006098  00000000  00000000  00050a8b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 16 .comment      0000007c  00000000  00000000  00056b13  2**0
+ 16 .comment      0000007c  00000000  00000000  00056b23  2**0
                   CONTENTS, READONLY
- 17 .debug_frame  00004e64  00000000  00000000  00056b90  2**2
+ 17 .debug_frame  00004e64  00000000  00000000  00056ba0  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1203,8 +1203,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
     HAL_PWREx_EnableVddIO2();
  8000a4c:	f002 f836 	bl	8002abc <HAL_PWREx_EnableVddIO2>
     /**LPUART1 GPIO Configuration
-    PG7     ------> LPUART1_TX
-    PG8     ------> LPUART1_RX
+    PA2     ------> LPUART1_TX
+    PA3     ------> LPUART1_RX
     */
     GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3;
  8000a50:	230c      	movs	r3, #12
@@ -1418,7 +1418,7 @@ void OTG_FS_IRQHandler(void)
  8000aea:	bf00      	nop
  8000aec:	bd80      	pop	{r7, pc}
  8000aee:	bf00      	nop
- 8000af0:	2000055c 	.word	0x2000055c
+ 8000af0:	20000588 	.word	0x20000588
 
 08000af4 <_read>:
 	_kill(status, -1);
@@ -1533,7 +1533,7 @@ caddr_t _sbrk(int incr)
  8000b7c:	46bd      	mov	sp, r7
  8000b7e:	bd80      	pop	{r7, pc}
  8000b80:	200000ac 	.word	0x200000ac
- 8000b84:	20000864 	.word	0x20000864
+ 8000b84:	20000890 	.word	0x20000890
 
 08000b88 <_close>:
 
@@ -16221,19 +16221,19 @@ USBH_StatusTypeDef USBH_HID_KeybdInit(USBH_HandleTypeDef *phost)
  8006326:	3301      	adds	r3, #1
  8006328:	60fb      	str	r3, [r7, #12]
  800632a:	68fb      	ldr	r3, [r7, #12]
- 800632c:	2b01      	cmp	r3, #1
+ 800632c:	2b07      	cmp	r3, #7
  800632e:	d9ef      	bls.n	8006310 <USBH_HID_KeybdInit+0x50>
   }
 
   if (HID_Handle->length > (sizeof(keybd_report_data)))
  8006330:	68bb      	ldr	r3, [r7, #8]
  8006332:	8b1b      	ldrh	r3, [r3, #24]
- 8006334:	2b08      	cmp	r3, #8
+ 8006334:	2b20      	cmp	r3, #32
  8006336:	d902      	bls.n	800633e <USBH_HID_KeybdInit+0x7e>
   {
     HID_Handle->length = (sizeof(keybd_report_data));
  8006338:	68bb      	ldr	r3, [r7, #8]
- 800633a:	2208      	movs	r2, #8
+ 800633a:	2220      	movs	r2, #32
  800633c:	831a      	strh	r2, [r3, #24]
   }
   HID_Handle->pData = (uint8_t *)(void *)keybd_rx_report_buf;
@@ -16245,21 +16245,20 @@ USBH_StatusTypeDef USBH_HID_KeybdInit(USBH_HandleTypeDef *phost)
  8006346:	f103 0008 	add.w	r0, r3, #8
  800634a:	687b      	ldr	r3, [r7, #4]
  800634c:	f503 738e 	add.w	r3, r3, #284	; 0x11c
- 8006350:	2250      	movs	r2, #80	; 0x50
- 8006352:	4619      	mov	r1, r3
- 8006354:	f7ff fefa 	bl	800614c <USBH_HID_FifoInit>
+ 8006350:	f44f 72a0 	mov.w	r2, #320	; 0x140
+ 8006354:	4619      	mov	r1, r3
+ 8006356:	f7ff fef9 	bl	800614c <USBH_HID_FifoInit>
 
   return USBH_OK;
- 8006358:	2300      	movs	r3, #0
+ 800635a:	2300      	movs	r3, #0
 }
- 800635a:	4618      	mov	r0, r3
- 800635c:	3710      	adds	r7, #16
- 800635e:	46bd      	mov	sp, r7
- 8006360:	bd80      	pop	{r7, pc}
- 8006362:	bf00      	nop
- 8006364:	20000154 	.word	0x20000154
+ 800635c:	4618      	mov	r0, r3
+ 800635e:	3710      	adds	r7, #16
+ 8006360:	46bd      	mov	sp, r7
+ 8006362:	bd80      	pop	{r7, pc}
+ 8006364:	20000184 	.word	0x20000184
  8006368:	20000144 	.word	0x20000144
- 800636c:	2000014c 	.word	0x2000014c
+ 800636c:	20000164 	.word	0x20000164
 
 08006370 <USBH_HID_GetKeybdInfo>:
   *         The function return keyboard information.
@@ -16294,7 +16293,7 @@ HID_KEYBD_Info_TypeDef *USBH_HID_GetKeybdInfo(USBH_HandleTypeDef *phost)
  800638e:	46bd      	mov	sp, r7
  8006390:	bd80      	pop	{r7, pc}
  8006392:	bf00      	nop
- 8006394:	20000154 	.word	0x20000154
+ 8006394:	20000184 	.word	0x20000184
 
 08006398 <USBH_HID_KeybdDecode>:
   *         The function decode keyboard data.
@@ -16426,7 +16425,7 @@ static USBH_StatusTypeDef USBH_HID_KeybdDecode(USBH_HandleTypeDef *phost)
  8006472:	3301      	adds	r3, #1
  8006474:	73fb      	strb	r3, [r7, #15]
  8006476:	7bfb      	ldrb	r3, [r7, #15]
- 8006478:	2b0b      	cmp	r3, #11
+ 8006478:	2b07      	cmp	r3, #7
  800647a:	d9ee      	bls.n	800645a <USBH_HID_KeybdDecode+0xc2>
     }
 
@@ -16444,7 +16443,7 @@ static USBH_StatusTypeDef USBH_HID_KeybdDecode(USBH_HandleTypeDef *phost)
  800648a:	bf00      	nop
  800648c:	20000144 	.word	0x20000144
  8006490:	0800a028 	.word	0x0800a028
- 8006494:	20000154 	.word	0x20000154
+ 8006494:	20000184 	.word	0x20000184
  8006498:	0800a048 	.word	0x0800a048
  800649c:	0800a068 	.word	0x0800a068
  80064a0:	0800a088 	.word	0x0800a088
@@ -16548,9 +16547,9 @@ USBH_StatusTypeDef USBH_HID_MouseInit(USBH_HandleTypeDef *phost)
  800653a:	3710      	adds	r7, #16
  800653c:	46bd      	mov	sp, r7
  800653e:	bd80      	pop	{r7, pc}
- 8006540:	2000016c 	.word	0x2000016c
- 8006544:	20000174 	.word	0x20000174
- 8006548:	2000017c 	.word	0x2000017c
+ 8006540:	20000198 	.word	0x20000198
+ 8006544:	200001a0 	.word	0x200001a0
+ 8006548:	200001a8 	.word	0x200001a8
 
 0800654c <HID_ReadItem>:
   * @param  ri: report item
@@ -21259,7 +21258,7 @@ void MX_USB_HOST_Init(void)
  80080bc:	bd80      	pop	{r7, pc}
  80080be:	bf00      	nop
  80080c0:	080080e1 	.word	0x080080e1
- 80080c4:	20000184 	.word	0x20000184
+ 80080c4:	200001b0 	.word	0x200001b0
  80080c8:	2000000c 	.word	0x2000000c
 
 080080cc <MX_USB_HOST_Process>:
@@ -21279,7 +21278,7 @@ void MX_USB_HOST_Process(void)
  80080d6:	bf00      	nop
  80080d8:	bd80      	pop	{r7, pc}
  80080da:	bf00      	nop
- 80080dc:	20000184 	.word	0x20000184
+ 80080dc:	200001b0 	.word	0x200001b0
 
 080080e0 <USBH_UserProcess>:
 /*
@@ -21758,7 +21757,7 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
  800839a:	46bd      	mov	sp, r7
  800839c:	bd80      	pop	{r7, pc}
  800839e:	bf00      	nop
- 80083a0:	2000055c 	.word	0x2000055c
+ 80083a0:	20000588 	.word	0x20000588
 
 080083a4 <USBH_LL_Start>:
   * @brief  Start the low level portion of the host driver.
@@ -22505,7 +22504,7 @@ LoopForever:
   ldr r2, =_sbss
  8008758:	20000090 	.word	0x20000090
   ldr r4, =_ebss
- 800875c:	20000864 	.word	0x20000864
+ 800875c:	20000890 	.word	0x20000890
 
 08008760 <ADC1_2_IRQHandler>:
  * @retval : None
@@ -22793,7 +22792,7 @@ Infinite_Loop:
  80089ae:	b103      	cbz	r3, 80089b2 <_sbrk_r+0x1a>
  80089b0:	602b      	str	r3, [r5, #0]
  80089b2:	bd38      	pop	{r3, r4, r5, pc}
- 80089b4:	20000860 	.word	0x20000860
+ 80089b4:	2000088c 	.word	0x2000088c
 
 080089b8 <siprintf>:
  80089b8:	b40e      	push	{r1, r2, r3}
@@ -24107,7 +24106,7 @@ Infinite_Loop:
  8009596:	b103      	cbz	r3, 800959a <_write_r+0x1e>
  8009598:	602b      	str	r3, [r5, #0]
  800959a:	bd38      	pop	{r3, r4, r5, pc}
- 800959c:	20000860 	.word	0x20000860
+ 800959c:	2000088c 	.word	0x2000088c
 
 080095a0 <__swsetup_r>:
  80095a0:	4b32      	ldr	r3, [pc, #200]	; (800966c <__swsetup_r+0xcc>)
@@ -24217,7 +24216,7 @@ Infinite_Loop:
  8009692:	b103      	cbz	r3, 8009696 <_close_r+0x1a>
  8009694:	602b      	str	r3, [r5, #0]
  8009696:	bd38      	pop	{r3, r4, r5, pc}
- 8009698:	20000860 	.word	0x20000860
+ 8009698:	2000088c 	.word	0x2000088c
 
 0800969c <__sflush_r>:
  800969c:	898a      	ldrh	r2, [r1, #12]
@@ -24395,7 +24394,7 @@ Infinite_Loop:
  800981a:	b103      	cbz	r3, 800981e <_lseek_r+0x1e>
  800981c:	602b      	str	r3, [r5, #0]
  800981e:	bd38      	pop	{r3, r4, r5, pc}
- 8009820:	20000860 	.word	0x20000860
+ 8009820:	2000088c 	.word	0x2000088c
 
 08009824 <__swhatbuf_r>:
  8009824:	b570      	push	{r4, r5, r6, lr}
@@ -24568,7 +24567,7 @@ Infinite_Loop:
  800999e:	b103      	cbz	r3, 80099a2 <_read_r+0x1e>
  80099a0:	602b      	str	r3, [r5, #0]
  80099a2:	bd38      	pop	{r3, r4, r5, pc}
- 80099a4:	20000860 	.word	0x20000860
+ 80099a4:	2000088c 	.word	0x2000088c
 
 080099a8 <_fstat_r>:
  80099a8:	b538      	push	{r3, r4, r5, lr}
@@ -24586,7 +24585,7 @@ Infinite_Loop:
  80099c2:	602b      	str	r3, [r5, #0]
  80099c4:	bd38      	pop	{r3, r4, r5, pc}
  80099c6:	bf00      	nop
- 80099c8:	20000860 	.word	0x20000860
+ 80099c8:	2000088c 	.word	0x2000088c
 
 080099cc <_isatty_r>:
  80099cc:	b538      	push	{r3, r4, r5, lr}
@@ -24602,7 +24601,7 @@ Infinite_Loop:
  80099e2:	b103      	cbz	r3, 80099e6 <_isatty_r+0x1a>
  80099e4:	602b      	str	r3, [r5, #0]
  80099e6:	bd38      	pop	{r3, r4, r5, pc}
- 80099e8:	20000860 	.word	0x20000860
+ 80099e8:	2000088c 	.word	0x2000088c
 
 080099ec <_malloc_usable_size_r>:
  80099ec:	f851 0c04 	ldr.w	r0, [r1, #-4]

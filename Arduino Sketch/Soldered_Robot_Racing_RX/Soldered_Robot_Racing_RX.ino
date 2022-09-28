@@ -10,6 +10,8 @@
  *              1 x 18650 Lihium Battery
  *              1 x STM32L496 Nucleo Board
  *  	        1 x USB Wheel (or PS2 controller with PS2 to USB controller)
+ *              1 x USB Type A Female Adapter Breakout www.solde.red/333132
+ *              1 x Micro USB Cable www.solde.red/101295
  *              Jumper wires www.solde.red/100865
  *              To use Dasduino Connect, Arduino Dasduino Connect Core needs to be installed.
  *              

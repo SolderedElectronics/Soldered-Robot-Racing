@@ -84,10 +84,10 @@ c:/program files (x86)/atollic/truestudio for stm32 9.3.0/armtools/bin/../lib/gc
 Allocating common symbols
 Common symbol       size              file
 
-keybd_report_data   0x8               Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_keybd.o
+keybd_report_data   0x20              Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_keybd.o
 keybd_rx_report_buf
-                    0x8               Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_keybd.o
-keybd_info          0x15              Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_keybd.o
+                    0x20              Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_keybd.o
+keybd_info          0x11              Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_keybd.o
 errno               0x4               c:/program files (x86)/atollic/truestudio for stm32 9.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-reent.o)
 mouse_info          0x5               Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_mouse.o
 hUsbHostFS          0x3d8             USB_HOST\App\usb_host.o
@@ -2371,7 +2371,7 @@ LOAD c:/program files (x86)/atollic/truestudio for stm32 9.3.0/armtools/bin/../l
  .igot.plt      0x20000090        0x0 c:/program files (x86)/atollic/truestudio for stm32 9.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv7e-m/fpu/crtbegin.o
                 0x20000090                . = ALIGN (0x4)
 
-.bss            0x20000090      0x7d4 load address 0x0800a280
+.bss            0x20000090      0x800 load address 0x0800a280
                 0x20000090                _sbss = .
                 0x20000090                __bss_start__ = _sbss
  *(.bss)
@@ -2394,35 +2394,35 @@ LOAD c:/program files (x86)/atollic/truestudio for stm32 9.3.0/armtools/bin/../l
                 0x200000bc                hlpuart1
  COMMON         0x20000140        0x4 Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal.o
                 0x20000140                uwTick
- COMMON         0x20000144       0x25 Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_keybd.o
+ COMMON         0x20000144       0x51 Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_keybd.o
                 0x20000144                keybd_report_data
-                0x2000014c                keybd_rx_report_buf
-                0x20000154                keybd_info
- *fill*         0x20000169        0x3 
- COMMON         0x2000016c       0x18 Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_mouse.o
-                0x2000016c                mouse_info
-                0x20000174                mouse_report_data
-                0x2000017c                mouse_rx_report_buf
- COMMON         0x20000184      0x3d8 USB_HOST\App\usb_host.o
-                0x20000184                hUsbHostFS
- COMMON         0x2000055c      0x304 USB_HOST\Target\usbh_conf.o
-                0x2000055c                hhcd_USB_OTG_FS
- COMMON         0x20000860        0x4 c:/program files (x86)/atollic/truestudio for stm32 9.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-reent.o)
-                0x20000860                errno
-                0x20000864                . = ALIGN (0x4)
-                0x20000864                _ebss = .
-                0x20000864                __bss_end__ = _ebss
+                0x20000164                keybd_rx_report_buf
+                0x20000184                keybd_info
+ *fill*         0x20000195        0x3 
+ COMMON         0x20000198       0x18 Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_mouse.o
+                0x20000198                mouse_info
+                0x200001a0                mouse_report_data
+                0x200001a8                mouse_rx_report_buf
+ COMMON         0x200001b0      0x3d8 USB_HOST\App\usb_host.o
+                0x200001b0                hUsbHostFS
+ COMMON         0x20000588      0x304 USB_HOST\Target\usbh_conf.o
+                0x20000588                hhcd_USB_OTG_FS
+ COMMON         0x2000088c        0x4 c:/program files (x86)/atollic/truestudio for stm32 9.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/fpu\libc_nano.a(lib_a-reent.o)
+                0x2000088c                errno
+                0x20000890                . = ALIGN (0x4)
+                0x20000890                _ebss = .
+                0x20000890                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x20000864      0x600 load address 0x0800a280
-                0x20000864                . = ALIGN (0x4)
-                0x20000864                PROVIDE (end, .)
+                0x20000890      0x600 load address 0x0800a280
+                0x20000890                . = ALIGN (0x4)
+                0x20000890                PROVIDE (end, .)
                 [!provide]                PROVIDE (_end, .)
-                0x20000a64                . = (. + _Min_Heap_Size)
- *fill*         0x20000864      0x200 
-                0x20000e64                . = (. + _Min_Stack_Size)
- *fill*         0x20000a64      0x400 
-                0x20000e64                . = ALIGN (0x4)
+                0x20000a90                . = (. + _Min_Heap_Size)
+ *fill*         0x20000890      0x200 
+                0x20000e90                . = (. + _Min_Stack_Size)
+ *fill*         0x20000a90      0x400 
+                0x20000e90                . = ALIGN (0x4)
 
 /DISCARD/
  libc.a(*)
@@ -2572,7 +2572,7 @@ LOAD c:/program files (x86)/atollic/truestudio for stm32 9.3.0/armtools/bin/../l
                 0x00000ddc       0x22 c:/program files (x86)/atollic/truestudio for stm32 9.3.0/armtools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv7e-m/fpu/crtn.o
 OUTPUT(USB_WheeL_Car.elf elf32-littlearm)
 
-.debug_info     0x00000000    0x20e86
+.debug_info     0x00000000    0x20e96
  .debug_info    0x00000000     0x1ff5 Core\Src\main.o
  .debug_info    0x00001ff5      0xe02 Core\Src\stm32l4xx_hal_msp.o
  .debug_info    0x00002df7      0x84b Core\Src\stm32l4xx_it.o
@@ -2589,17 +2589,17 @@ OUTPUT(USB_WheeL_Car.elf elf32-littlearm)
  .debug_info    0x0000b7aa     0x4243 Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_uart.o
  .debug_info    0x0000f9ed     0x1b26 Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_ll_usb.o
  .debug_info    0x00011513     0x1b55 Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid.o
- .debug_info    0x00013068     0x1889 Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_keybd.o
- .debug_info    0x000148f1     0x1738 Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_mouse.o
- .debug_info    0x00016029     0x149b Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_parser.o
- .debug_info    0x000174c4     0x17ea Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_core.o
- .debug_info    0x00018cae     0x18aa Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ctlreq.o
- .debug_info    0x0001a558     0x1617 Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ioreq.o
- .debug_info    0x0001bb6f     0x145a Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_pipes.o
- .debug_info    0x0001cfc9     0x13ad USB_HOST\App\usb_host.o
- .debug_info    0x0001e376     0x26a1 USB_HOST\Target\usbh_conf.o
- .debug_info    0x00020a17      0x3c4 USB_HOST\Target\usbh_platform.o
- .debug_info    0x00020ddb       0xab startup\startup_stm32l496xx.o
+ .debug_info    0x00013068     0x1899 Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_keybd.o
+ .debug_info    0x00014901     0x1738 Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_mouse.o
+ .debug_info    0x00016039     0x149b Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_parser.o
+ .debug_info    0x000174d4     0x17ea Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_core.o
+ .debug_info    0x00018cbe     0x18aa Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ctlreq.o
+ .debug_info    0x0001a568     0x1617 Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ioreq.o
+ .debug_info    0x0001bb7f     0x145a Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_pipes.o
+ .debug_info    0x0001cfd9     0x13ad USB_HOST\App\usb_host.o
+ .debug_info    0x0001e386     0x26a1 USB_HOST\Target\usbh_conf.o
+ .debug_info    0x00020a27      0x3c4 USB_HOST\Target\usbh_platform.o
+ .debug_info    0x00020deb       0xab startup\startup_stm32l496xx.o
 
 .debug_abbrev   0x00000000     0x3cc2
  .debug_abbrev  0x00000000      0x346 Core\Src\main.o

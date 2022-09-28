@@ -107,8 +107,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
     __HAL_RCC_GPIOG_CLK_ENABLE();
     HAL_PWREx_EnableVddIO2();
     /**LPUART1 GPIO Configuration
-    PG7     ------> LPUART1_TX
-    PG8     ------> LPUART1_RX
+    PA2     ------> LPUART1_TX
+    PA3     ------> LPUART1_RX
     */
     GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;

@@ -94,8 +94,8 @@ static USBH_StatusTypeDef USBH_HID_KeybdDecode(USBH_HandleTypeDef *phost);
 */
 
 HID_KEYBD_Info_TypeDef     keybd_info;
-uint32_t                   keybd_rx_report_buf[2];
-uint32_t                   keybd_report_data[2];
+uint32_t                   keybd_rx_report_buf[8];
+uint32_t                   keybd_report_data[8];
 
 static const HID_Report_ItemTypedef imp_0_lctrl =
 {
@@ -207,7 +207,7 @@ static const HID_Report_ItemTypedef imp_0_key_array =
   (uint8_t *)(void *)keybd_report_data + 0, /*data*/
   8,     /*size*/
   0,     /*shift*/
-  12,     /*count (only for array items)*/
+  8,     /*count (only for array items)*/
   0,     /*signed?*/
   0,     /*min value read can return*/
   255,   /*max value read can return*/

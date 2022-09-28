@@ -281,7 +281,7 @@ typedef struct
   uint8_t rshift;
   uint8_t ralt;
   uint8_t rgui;
-  uint8_t keys[12];
+  uint8_t keys[8];
 }
 HID_KEYBD_Info_TypeDef;
 
