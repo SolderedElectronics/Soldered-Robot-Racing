@@ -8,7 +8,7 @@ static bool incommingDataFlag = false;
 void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len)
 {
     memcpy(&myMessage, incomingData, sizeof(myMessage));
-    myMessage.lastMessageTimestamp = millis();
+    myMessage.lastMessageTimestamp = micros();
     incommingDataFlag = true;
 }
 
@@ -134,4 +134,14 @@ int RF::parseData(struct robotData *_r)
     }
 
     return 1;
+}
+
+unsigned long RF::lastMessageTime()
+{
+    return myMessage.lastMessageTimestamp;
+}
+
+void RF::clearLastMessageTime()
+{
+    myMessage.lastMessageTimestamp = 0;
 }

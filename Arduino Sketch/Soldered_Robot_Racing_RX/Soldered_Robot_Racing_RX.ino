@@ -54,6 +54,9 @@ void setup()
     // Init library for the WS2812 LEDs on the robot.
     led.begin();
 
+    // Stop the motors
+    robot.stopMotors();
+
     // Turn on Front light to "low beam"
     led.setPixelColor(0, led.Color(32, 32, 32));
     led.setPixelColor(3, led.Color(32, 32, 32));
@@ -157,4 +160,39 @@ void loop()
             Serial.println("Failed to parse data");
         }
     }
+
+    // If no new message is not recived in some time, stop everything.
+    // This is a safty measure, if communication is lost in the middle of robot movemet, so the robot can be stopped.
+    if (((unsigned long)(micros() - rf.lastMessageTime()) > MESSAGE_TIMEOUT) && (rf.lastMessageTime() != 0))
+    {
+        // Reset the last recived message time (here is used like a flag).
+        rf.clearLastMessageTime();
+
+        // Stop the motors.
+        robot.stopMotors();
+
+        // Set front and back LEDs into default state.
+        // Frontlights
+        led.setPixelColor(0, led.Color(32, 32, 32));
+        led.setPixelColor(3, led.Color(32, 32, 32));
+
+        // Tailgate lights
+        led.setPixelColor(1, led.Color(128, 0, 0));
+        led.setPixelColor(2, led.Color(128, 0, 0));
+        led.show();
+
+        // Robot lights (two red LEDs at the front)
+        robot.setLeds(0, DFR_LED_LEFT);
+        robot.setLeds(0, DFR_LED_RIGHT);
+
+        // Stop the buzzer
+        if (myRobotData.horn)
+        {
+            ledcDetachPin(BUZZER_PIN);
+            ledcWrite(0, 0);
+        }
+    }
+
+    // Wait a little bit (so other background tasks have time to be executed).
+    delay(10);
 }

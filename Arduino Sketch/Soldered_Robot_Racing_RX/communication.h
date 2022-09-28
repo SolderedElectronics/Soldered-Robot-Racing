@@ -15,6 +15,8 @@ class RF
     int available();
     int checksumCalculation(struct msg *_m);
     int parseData(struct robotData *_r);
+    unsigned long lastMessageTime();
+    void clearLastMessageTime();
 
     struct msg _myMessage;
     esp_now_peer_info_t peerInfo;
